@@ -1,0 +1,53 @@
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Library</title>
+</head>
+<body>
+    <dialog class="modal">
+        <div class="modal-container">
+            <h2>Add a book</h2>
+            <form class="add-book-form">
+                <div class="form-container">
+                    <p>Title</p>
+                    <input type="text" id="title" class="error-class">
+                </div>
+                <p class="title-error"></p>
+                <div class="form-container">
+                    <p>Author</p>
+                    <input type="text" id="author" required>
+                </div>
+                <p class="author-error"></p>
+                <div class="form-container">
+                    <p>Pages</p>
+                    <input type="number" id="pages" required>
+                </div>
+                <p class="pages-error"></p>
+                <div class="form-container">
+                    <legend>Have you read the book:</legend>
+                    <div class="radio-border">
+                        <input type="radio" id="read" name="finished" value="Read">
+                        <label for="read">Read</label>
+                    </div>
+                    <div class="radio-border">
+                        <input type="radio" id="not-read" name="finished" value="Not read" checked>
+                        <label for="not-read">Not read</label>
+                    </div>
+                </div>
+            </form>
+            <button type="submit" class="close-modal">Add book</button>
+        </div>
+    </dialog>
+    <div class="main-container">
+        <header>
+            <h2>Library</h2>
+            <button class="new-book-button">Add book</button>
+        </header>
+        <div class="content-container">
+        </div>
+    </div>    
+</body>
+</html>

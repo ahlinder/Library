@@ -1,0 +1,132 @@
+@font-face {
+    font-family: DM-sans;
+    src: url(fonts/DM_Sans/DMSans-VariableFont_opsz\,wght.ttf);
+}
+
+* {
+    font-family: DM-sans;
+    margin: 0;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    background-color: white;
+    height: 100vh;
+}
+
+header {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: auto;
+    width: 100%;
+    background-color: #e0f2fe;
+    padding: 1rem;
+    margin: 0;
+}
+
+button {
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+}
+
+.content-container {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 0;
+}
+
+.card {
+    height: auto;
+    border-radius: 5px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    padding: 10px;
+    margin: 10px;
+    width: 20vw;
+    display: flex;
+    flex-direction: column;
+    background-color: #f3f4f6;
+}
+
+.card p {
+    padding: 10px 0;
+}
+
+.card > button {
+    margin: 10px 0;
+}
+
+
+.modal {
+    padding: 10px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    border: none;
+    margin: auto;
+}
+
+.modal-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-container > * {
+    padding: 10px;
+}
+
+.add-book-form > *{
+    padding-bottom: 10px;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-container > input {
+    /* border-radius: 7px; */
+    /* border: 1px solid black; */
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.form-container > input:focus {
+    /* border-radius: 7px; */
+    outline: none;
+    border: 1px solid #93c5fd;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.error {
+    background-color: #f87171;
+    font-size: 14px;
+    padding: 3px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+}
+
+.form-container > label {
+    padding: 0 10px;
+
+}
+
+.radio-border {
+    border: 1px solid black;
+    border-radius: 5px;
+    padding: 5px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+#read, #not-read {
+    margin: 0 5px;
+} 
