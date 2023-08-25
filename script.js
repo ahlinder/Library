@@ -26,59 +26,59 @@ function showBooksInLibrary() {
 }
 
 function createCard(book) {
-        const divElement = document.createElement("div");
-        divElement.dataset.index = myLibrary.length - 1;
-        divElement.classList.add('card');
-    
-        const h = document.createElement("p");
-        h.textContent = `Title: ${book.title}`;
-        divElement.appendChild(h);
-    
-        const p1 = document.createElement("p");
-        p1.textContent = `Author: ${book.author}`;
-        divElement.appendChild(p1);
-    
-        const p2 = document.createElement("p");
-        p2.textContent = `Pages: ${book.pages}`;
-        divElement.appendChild(p2);
+    const divElement = document.createElement("div");
+    divElement.dataset.index = myLibrary.length - 1;
+    divElement.classList.add('card');
 
-        const bookReadButton = document.createElement('button');
-        if(book.read){
-            bookReadButton.textContent = "Read";
+    const h = document.createElement("p");
+    h.textContent = `Title: ${book.title}`;
+    divElement.appendChild(h);
+
+    const p1 = document.createElement("p");
+    p1.textContent = `Author: ${book.author}`;
+    divElement.appendChild(p1);
+
+    const p2 = document.createElement("p");
+    p2.textContent = `Pages: ${book.pages}`;
+    divElement.appendChild(p2);
+
+    const bookReadButton = document.createElement('button');
+    if(book.read){
+        bookReadButton.textContent = "Read";
+        bookReadButton.style.backgroundColor = '#4ade80';
+    }
+    else{
+        bookReadButton.textContent = "Unread";
+        bookReadButton.style.backgroundColor = '#f87171';
+    }
+    divElement.appendChild(bookReadButton);
+    bookReadButton.addEventListener('click', (e) => {
+        if(!book.read){
+            bookReadButton.textContent = 'Read';
             bookReadButton.style.backgroundColor = '#4ade80';
+            book.read = true;
         }
         else{
-            bookReadButton.textContent = "Unread";
+            bookReadButton.textContent = 'Unread';
             bookReadButton.style.backgroundColor = '#f87171';
+            book.read = false;
         }
-        divElement.appendChild(bookReadButton);
-        bookReadButton.addEventListener('click', (e) => {
-            if(!book.read){
-                bookReadButton.textContent = 'Read';
-                bookReadButton.style.backgroundColor = '#4ade80';
-                book.read = true;
-            }
-            else{
-                bookReadButton.textContent = 'Unread';
-                bookReadButton.style.backgroundColor = '#f87171';
-                book.read = false;
-            }
-        });
+    });
 
-        const removeButton = document.createElement('button');
-        removeButton.textContent = 'Remove';
-        divElement.appendChild(removeButton);
-        removeButton.addEventListener('click', (e) => {
-            const cardElement = e.target.closest('.card');
-            if(cardElement){
-                const index = cardElement.dataset.index;
-                removeCard(index);
-                myLibrary.splice(index, 1);
-            }
-        });
-   
-        const existingContainer = document.querySelector('.content-container');
-        existingContainer.appendChild(divElement);
+    const removeButton = document.createElement('button');
+    removeButton.textContent = 'Remove';
+    divElement.appendChild(removeButton);
+    removeButton.addEventListener('click', (e) => {
+        const cardElement = e.target.closest('.card');
+        if(cardElement){
+            const index = cardElement.dataset.index;
+            removeCard(index);
+            myLibrary.splice(index, 1);
+        }
+    });
+
+    const existingContainer = document.querySelector('.content-container');
+    existingContainer.appendChild(divElement);
 }
 
 function removeCard(arrayIndex) {
@@ -86,10 +86,6 @@ function removeCard(arrayIndex) {
     if(cardToRemove) {
         cardToRemove.parentNode.removeChild(cardToRemove);
     }
-}
-
-function addBook() {
-    
 }
 
 function checkError(titleValue, authorValue, pagesValue){
@@ -102,7 +98,7 @@ function checkError(titleValue, authorValue, pagesValue){
         return false;
     }
     if(isNaN(pagesValue)){
-        showError("pages-error", "You have to add the amount of pages");
+        showError("pages-error", "You have to add a page amount");
         return false;
     }
     return true;
@@ -126,8 +122,8 @@ function removeErrors(){
 
     const modal = document.querySelector('.modal');
     const addBookButton = document.querySelector('.new-book-button');
-    const bookForm = document.querySelector('.add-book-form');
-    let title = document.getElementById('title');
+    const bookForm = document.querySelector('form');
+    const title = document.getElementById('title');
     const author = document.getElementById('author');
     const pages = document.getElementById('pages');
     const read = document.getElementById('read');
@@ -138,6 +134,11 @@ function removeErrors(){
 
     const closeModalButton = document.querySelector('.close-modal');
     closeModalButton.addEventListener('click', () => {
+            modal.close();
+    });
+
+    bookForm.addEventListener('submit', (event) => {
+        event.preventDefault();
         removeErrors();
         const titleValue = title.value;
         const authorValue = author.value;
@@ -150,38 +151,4 @@ function removeErrors(){
             bookForm.reset();
             modal.close();
         }
-
     });
-
-    function addErrorBorder(titleValue, authorValue, pagesValue) { //doesn't work, not the correct method either
-        if(titleValue.length < 1){
-            title.classList.add('error-class');
-        }
-    }
-
-    //not working with 'submit' as event, fix this.
-
-    bookForm.addEventListener('submit', (event) => {
-        event.preventDefault();
-        // const title = document.getElementById('title').value;
-        // console.log(title);
-        // const author = document.getElementById('author').value;
-        // console.log(author);
-        // const pages = parseInt(document.getElementById('pages').value, 10);
-        // console.log(pages);
-        // const read = document.getElementById('read').checked;
-        // console.log(read);
-        // const newBook = new Book(title, author, pages, read);
-        // console.log(newBook);
-        // addBookToLibrary(newBook);
-        // showBooksInLibrary();
-        bookForm.reset();
-        modal.close();
-    });
-
-
-
-
-    const harryPotter = new Book("Harry Potter", "JK-Rowling", 540, "Yes");
-    // addBookToLibrary(harryPotter);
-    // showBooksInLibrary();

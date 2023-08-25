@@ -29,6 +29,12 @@ header {
     margin: 0;
 }
 
+.button-container {
+    display: flex;
+    justify-content: space-between;
+
+}
+
 button {
     border-radius: 10px;
     cursor: pointer;
@@ -75,8 +81,11 @@ button {
 .modal-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
+}
+
+.submit-modal, .close-modal {
+    
 }
 
 .modal-container > * {
@@ -93,8 +102,8 @@ button {
 }
 
 .form-container > input {
-    /* border-radius: 7px; */
-    /* border: 1px solid black; */
+    /* border-radius: 7px;
+    border: 1px solid black; */
     box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 

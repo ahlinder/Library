@@ -10,7 +10,7 @@
     <dialog class="modal">
         <div class="modal-container">
             <h2>Add a book</h2>
-            <form class="add-book-form">
+            <form class="add-book-form" novalidate>
                 <div class="form-container">
                     <p>Title</p>
                     <input type="text" id="title" class="error-class">
@@ -37,8 +37,17 @@
                         <label for="not-read">Not read</label>
                     </div>
                 </div>
+                <div class="button-container">
+                    <button type="submit" class="submit-modal">Add book</button>
+                    <!-- <input type="submit" class="submit-modal"> -->
+                    <button type="button" class="close-modal">Cancel</button>    
+                </div>
             </form>
-            <button type="submit" class="close-modal">Add book</button>
+            <!-- <div class="button-container">
+                <button type="submit" class="submit-modal">Add book</button>
+                <input type="submit" class="submit-modal">
+                <button type="button" class="close-modal">Cancel</button>    
+            </div> -->
         </div>
     </dialog>
     <div class="main-container">
