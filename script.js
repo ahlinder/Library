@@ -1,84 +1,91 @@
-const myLibrary = [];
+class Library {
 
-function Book(title, author, pages, read){
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    if(read){
-        this.read = true;
+    constructor() {
+        this.books = [];
     }
-    else{
-        this.read = false;
+
+    addBookToLibrary(newBook) {
+        this.books.push(newBook);
     }
-    this.info = function() {
-        return(`The ${title} by ${author}, ${pages} pages, `);
+
+    showBooksInLibrary() {
+        for (const book of books) {
+            createCard(book);
+        }
     }
-}
 
-function addBookToLibrary(newBook) {
-    myLibrary.push(newBook);
-}
-
-function showBooksInLibrary() {
-    for (const book of myLibrary) {
-        createCard(book);
-    }
-}
-
-function createCard(book) {
-    const divElement = document.createElement("div");
-    divElement.dataset.index = myLibrary.length - 1;
-    divElement.classList.add('card');
-
-    const h = document.createElement("p");
-    h.textContent = `Title: ${book.title}`;
-    divElement.appendChild(h);
-
-    const p1 = document.createElement("p");
-    p1.textContent = `Author: ${book.author}`;
-    divElement.appendChild(p1);
-
-    const p2 = document.createElement("p");
-    p2.textContent = `Pages: ${book.pages}`;
-    divElement.appendChild(p2);
-
-    const bookReadButton = document.createElement('button');
-    if(book.read){
-        bookReadButton.textContent = "Read";
-        bookReadButton.style.backgroundColor = '#4ade80';
-    }
-    else{
-        bookReadButton.textContent = "Unread";
-        bookReadButton.style.backgroundColor = '#f87171';
-    }
-    divElement.appendChild(bookReadButton);
-    bookReadButton.addEventListener('click', (e) => {
-        if(!book.read){
-            bookReadButton.textContent = 'Read';
+    createCard(book) {
+        const divElement = document.createElement("div");
+        divElement.dataset.index = books.length - 1;
+        divElement.classList.add('card');
+    
+        const h = document.createElement("p");
+        h.textContent = `Title: ${book.title}`;
+        divElement.appendChild(h);
+    
+        const p1 = document.createElement("p");
+        p1.textContent = `Author: ${book.author}`;
+        divElement.appendChild(p1);
+    
+        const p2 = document.createElement("p");
+        p2.textContent = `Pages: ${book.pages}`;
+        divElement.appendChild(p2);
+    
+        const bookReadButton = document.createElement('button');
+        if(book.read){
+            bookReadButton.textContent = "Read";
             bookReadButton.style.backgroundColor = '#4ade80';
-            book.read = true;
         }
         else{
-            bookReadButton.textContent = 'Unread';
+            bookReadButton.textContent = "Unread";
             bookReadButton.style.backgroundColor = '#f87171';
-            book.read = false;
         }
-    });
+        divElement.appendChild(bookReadButton);
+        bookReadButton.addEventListener('click', (e) => {
+            if(!book.read){
+                bookReadButton.textContent = 'Read';
+                bookReadButton.style.backgroundColor = '#4ade80';
+                book.read = true;
+            }
+            else{
+                bookReadButton.textContent = 'Unread';
+                bookReadButton.style.backgroundColor = '#f87171';
+                book.read = false;
+            }
+        });
+        const removeButton = document.createElement('button');
+        removeButton.textContent = 'Remove';
+        divElement.appendChild(removeButton);
+        removeButton.addEventListener('click', (e) => {
+            const cardElement = e.target.closest('.card');
+            if(cardElement){
+                const index = cardElement.dataset.index;
+                removeCard(index);
+                books.splice(index, 1);
+            }
+        });
+    
+        const existingContainer = document.querySelector('.content-container');
+        existingContainer.appendChild(divElement);
+    }
+}
 
-    const removeButton = document.createElement('button');
-    removeButton.textContent = 'Remove';
-    divElement.appendChild(removeButton);
-    removeButton.addEventListener('click', (e) => {
-        const cardElement = e.target.closest('.card');
-        if(cardElement){
-            const index = cardElement.dataset.index;
-            removeCard(index);
-            myLibrary.splice(index, 1);
-        }
-    });
+//const myLibrary = [];
 
-    const existingContainer = document.querySelector('.content-container');
-    existingContainer.appendChild(divElement);
+books = new Library()
+
+class Book {
+    
+    constructor(title, author, pages, read){
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read
+    }
+
+    info() {
+        return(`The ${title} by ${author}, ${pages} pages, `);    
+    }
 }
 
 function removeCard(arrayIndex) {
@@ -146,8 +153,8 @@ function removeErrors(){
         const readChecked = read.checked;
         const newBook = new Book(titleValue, authorValue, pagesValue, readChecked);
         if(checkError(titleValue, authorValue, pagesValue)){
-            addBookToLibrary(newBook);
-            createCard(newBook);
+            books.addBookToLibrary(newBook);
+            books.createCard(newBook);
             bookForm.reset();
             modal.close();
         }
